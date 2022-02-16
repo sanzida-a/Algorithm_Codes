@@ -1,0 +1,47 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main()
+{
+	//freopen("in.txt", "r", stdin);
+	vector <int> w,// withdraw
+				d; //deposit
+	int wCnt, dCnt, n, in;
+	wCnt = dCnt = 0;
+	bool flag = true;
+
+	cin >>n;
+	while(n--){
+		cin >> in;
+		if(in % 2 == 0){
+			w.push_back(in);
+			wCnt++;
+			
+			if(wCnt > 1){
+				if(w[wCnt-1] <= w[wCnt-2]){
+					flag = false;
+				}
+			}
+		}
+		else{
+			d.push_back(in);
+			dCnt++;
+
+			if(dCnt > 1){
+				if(d[dCnt-1] <= d[dCnt -2]){
+					flag = false;
+				}
+			}
+
+		}
+	}
+
+	wCnt = (wCnt <= 3 ? 1: wCnt/3) +  (wCnt % 3 == 0 ? 0 : 1);
+	dCnt = (dCnt <= 2 ? 1: dCnt/2) +  (dCnt % 2 == 0 ? 0 :1);
+
+	cout << (wCnt > dCnt ? wCnt : dCnt) << endl << (flag == true ?"OK" : "NOT OK") << endl;
+	
+	return 0;
+}
